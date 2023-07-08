@@ -22,6 +22,10 @@ const user_schema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    isValid: {
+        type: Boolean,
+        default: false,
+    },
 
 })
 
