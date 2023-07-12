@@ -1,11 +1,17 @@
 //DATABASE CONNECTION
-require('dotenv').config();
+require("dotenv").config();
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.DB_URL, {
-    useNewUrlParser: true
-}).then(() => {
-    console.log("Connection Successful")
-}).catch((e) => {
-    console.log(e)
-})
+mongoose
+  .connect(
+    "mongodb+srv://uhasham71:hasham147@cluster0.tmjujxa.mongodb.net/?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+    }
+  )
+  .then(() => {
+    console.log("Connection Successful");
+  })
+  .catch((e) => {
+    console.log(e);
+  });
