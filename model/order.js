@@ -1,21 +1,25 @@
 const mongoose = require("mongoose");
 const { ObjectId } = require("mongodb");
 
-const product_schema = new mongoose.Schema({
+const order_schema = new mongoose.Schema({
   user_id: {
     type: ObjectId,
     ref: "users",
+  },
+  customer_name: {
+    type: String,
+    required: true,
   },
   product_name: {
     type: String,
     required: true,
   },
-  description: {
-    type: String,
-    required: true,
-  },
   price: {
     type: Number,
+    required: true,
+  },
+  delivery_date: {
+    type: String,
     required: true,
   },
   payment: {
@@ -25,7 +29,7 @@ const product_schema = new mongoose.Schema({
 });
 
 //creating collection
-const products = new mongoose.model("product", product_schema);
+const orders = new mongoose.model("order", order_schema);
 
 //export collection
-module.exports = { products };
+module.exports = { orders };

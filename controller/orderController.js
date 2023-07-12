@@ -1,20 +1,21 @@
-const { products } = require("../model/product");
+const { orders } = require("../model/order");
 const { ObjectId } = require("mongodb");
 
-const createProduct = async (req, res) => {
+const createOrder = async (req, res) => {
   try {
-    const addProduct = new products({
+    const addOrder = new orders({
       user_id: req.query.user_id,
+      customer_name: req.body.customer_name,
       product_name: req.body.product_name,
-      description: req.body.description,
       price: req.body.price,
+      delivery_date: req.body.delivery_date,
       payment: req.body.payment,
     });
 
-    const data = await addProduct.save();
+    const data = await addOrder.save();
     return res.send({
       status: 200,
-      message: "Product of User has been created",
+      message: "Order of User has been created",
       data,
     });
   } catch (e) {
@@ -23,15 +24,15 @@ const createProduct = async (req, res) => {
   }
 };
 
-const fetchProduct = async (req, res) => {
+const fetchOrder = async (req, res) => {
   try {
-    const data = await products.find({
+    const data = await orders.find({
       user_id: new ObjectId(req.query.user_id),
     });
 
     return res.send({
       status: 200,
-      message: "Products of User has been fetched",
+      message: "Orders of User has been fetched",
       data,
     });
   } catch (e) {
@@ -39,5 +40,4 @@ const fetchProduct = async (req, res) => {
     res.status(400).send(e);
   }
 };
-
-module.exports = { createProduct, fetchProduct };
+module.exports = { createOrder, fetchOrder };
