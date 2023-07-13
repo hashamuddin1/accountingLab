@@ -24,6 +24,7 @@ const order_schema = new mongoose.Schema({
   },
   payment: {
     type: String,
+    trim: true,
     required: true,
   },
 });
