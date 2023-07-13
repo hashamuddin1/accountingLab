@@ -6,6 +6,7 @@ const createProduct = async (req, res) => {
     const addProduct = new products({
       user_id: req.query.user_id,
       product_name: req.body.product_name,
+      seller_name: req.body.seller_name,
       description: req.body.description,
       price: req.body.price,
       payment: req.body.payment,
@@ -40,4 +41,22 @@ const fetchProduct = async (req, res) => {
   }
 };
 
-module.exports = { createProduct, fetchProduct };
+const accountPayable = async (req, res) => {
+  try {
+    const data = await products.find({
+      user_id: new ObjectId(req.query.user_id),
+      payment: "pending",
+    });
+
+    return res.send({
+      status: 200,
+      message: "Account Payable of User has been fetched",
+      data,
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(400).send(e);
+  }
+};
+
+module.exports = { createProduct, fetchProduct, accountPayable };

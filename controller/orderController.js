@@ -40,4 +40,22 @@ const fetchOrder = async (req, res) => {
     res.status(400).send(e);
   }
 };
-module.exports = { createOrder, fetchOrder };
+
+const accountReceivable = async (req, res) => {
+  try {
+    const data = await orders.find({
+      user_id: new ObjectId(req.query.user_id),
+      payment: "pending",
+    });
+
+    return res.send({
+      status: 200,
+      message: "Account Receivable of User has been fetched",
+      data,
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(400).send(e);
+  }
+};
+module.exports = { createOrder, fetchOrder, accountReceivable };
