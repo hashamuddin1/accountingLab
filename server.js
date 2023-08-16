@@ -9,6 +9,7 @@ const subscriptionRouter = require("./router/subscriptionRoute");
 const customerRouter = require("./router/customerRoute");
 const productRouter = require("./router/productRoute");
 const orderRouter = require("./router/orderRoute");
+const cashRouter = require("./router/cashRoute");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,6 +19,7 @@ app.use([
   customerRouter,
   productRouter,
   orderRouter,
+  cashRouter,
 ]);
 
 app.listen(port, () => {
